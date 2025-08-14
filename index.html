@@ -952,17 +952,27 @@
                 display: block;
             }
             
-            .profile-btn span {
-                display: none;
-            }
-            
-            .profile-btn {
-                padding: 8px;
-            }
-            
             .auth-card {
                 max-width: 90%;
                 padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-btn span {
+                display: block;
+            }
+            
+            .profile-btn {
+                padding: 8px 12px;
+            }
+            
+            .mobile-nav-links {
+                gap: 8px;
+            }
+            
+            .mobile-nav-links a {
+                font-size: 1rem;
             }
         }
         
@@ -1013,6 +1023,10 @@
             .forgot-password {
                 margin-left: auto;
             }
+            
+            .profile-btn span {
+                max-width: 80px;
+            }
         }
     </style>
 </head>
@@ -1048,7 +1062,7 @@
             </div>
         </div>
         
-        <!-- Profile Dropdown (Initially hidden) -->
+        <!-- Profile Dropdown -->
         <div class="profile-dropdown" id="profileDropdown" style="display: none;">
             <button class="profile-btn">
                 <div class="profile-avatar" id="profileAvatar">
@@ -1078,7 +1092,7 @@
             </div>
         </div>
         
-        <!-- Login Button (Initially visible) -->
+        <!-- Login Button -->
         <button class="cta-button" id="loginBtn">Login</button>
     </nav>
     
@@ -1088,8 +1102,8 @@
             <h1>Premium Game Top-Ups in Seconds</h1>
             <p>Get Free Fire Diamonds and PUBG UC instantly with our secure platform. Enjoy the best rates and lightning-fast delivery for your gaming needs.</p>
             <div class="hero-buttons">
-                <button class="cta-button">Top Up Now</button>
-                <button class="cta-button" style="background: var(--gray);">View Packages</button>
+                <button class="cta-button"><a href="order.html">Top Up Now</a></button>
+                <button class="cta-button" style="background: var(--gray);"><a href="#p">Packages</a></button>
             </div>
         </div>
         <div class="hero-image">
@@ -1109,7 +1123,7 @@
                 </div>
                 <h3 class="game-title">Free Fire</h3>
                 <p class="game-desc">Get Free Fire diamonds instantly and unlock exclusive characters, weapons, and skins.</p>
-                <button class="cta-button">Buy Diamonds</button>
+                <button class="cta-button"><a href="order.html">buy Diamonds</a></button>
             </div>
             
             <div class="game-card">
@@ -1118,7 +1132,7 @@
                 </div>
                 <h3 class="game-title">PUBG Mobile</h3>
                 <p class="game-desc">Purchase PUBG UC quickly and upgrade your arsenal with premium weapon skins.</p>
-                <button class="cta-button">Buy UC</button>
+                <button class="cta-button"><a href="order.html">buy UC</a></button>
             </div>
             
             <div class="game-card">
@@ -1127,7 +1141,7 @@
                 </div>
                 <h3 class="game-title">Call of Duty</h3>
                 <p class="game-desc">Get COD Points instantly to unlock premium battle passes and weapon blueprints.</p>
-                <button class="cta-button">Buy COD Points</button>
+                <button class="cta-button"><a href="order.html">buy COD POINT</a></button>
             </div>
         </div>
     </section>
@@ -1138,41 +1152,41 @@
         <p class="section-subtitle">Best value packages for gamers</p>
         
         <div class="packages-container">
-            <div class="package-card">
+            <div class="package-card" id="p"> 
                 <h3 class="package-name">Starter Pack</h3>
-                <div class="package-price">₹<span>299</span></div>
+                <div class="package-price">₹<span>80</span></div>
                 <ul class="package-features">
-                    <li><i class="fas fa-check"></i> 100 Diamonds / 100 UC</li>
+                    <li><i class="fas fa-check"></i> 100+60 Diamonds / 100 UC</li>
                     <li><i class="fas fa-check"></i> Instant Delivery</li>
                     <li><i class="fas fa-check"></i> Basic Support</li>
                     <li><i class="fas fa-times"></i> Bonus Items</li>
                 </ul>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button"><a href="order.html">buy Now</a></button>
             </div>
             
             <div class="package-card popular">
                 <div class="popular-tag">POPULAR</div>
                 <h3 class="package-name">Pro Gamer</h3>
-                <div class="package-price">₹<span>999</span></div>
+                <div class="package-price">₹<span>400</span></div>
                 <ul class="package-features">
-                    <li><i class="fas fa-check"></i> 500 Diamonds / 500 UC</li>
+                    <li><i class="fas fa-check"></i> 500+200 Diamonds / 500 UC</li>
                     <li><i class="fas fa-check"></i> Instant Delivery</li>
                     <li><i class="fas fa-check"></i> Premium Support</li>
                     <li><i class="fas fa-check"></i> +10% Bonus Diamonds/UC</li>
                 </ul>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button"><a href="order.html">buy Now</a></button>
             </div>
             
             <div class="package-card">
                 <h3 class="package-name">Elite Bundle</h3>
-                <div class="package-price">₹<span>2,999</span></div>
+                <div class="package-price">₹<span>800</span></div>
                 <ul class="package-features">
-                    <li><i class="fas fa-check"></i> 1500 Diamonds / 1500 UC</li>
+                    <li><i class="fas fa-check"></i> 1060+400Diamonds / 1500 UC</li>
                     <li><i class="fas fa-check"></i> Instant Delivery</li>
                     <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
                     <li><i class="fas fa-check"></i> +25% Bonus Diamonds/UC</li>
                 </ul>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button"><a href="order.html">buy Now</a></button>
             </div>
         </div>
     </section>
@@ -1301,7 +1315,7 @@
                 
                 <div class="auth-actions">
                     <label class="remember-me">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="rememberMe" checked>
                         Remember me
                     </label>
                     <a href="#" class="forgot-password">Forgot Password?</a>
@@ -1423,6 +1437,7 @@
         const dropdownUserName = document.getElementById('dropdownUserName');
         const dropdownUserEmail = document.getElementById('dropdownUserEmail');
         const profileAvatar = document.getElementById('profileAvatar');
+        const rememberMe = document.getElementById('rememberMe');
         
         // Auth UI Elements
         const loginTab = document.getElementById('loginTab');
@@ -1434,6 +1449,30 @@
         const loginToggle = document.getElementById('loginToggle');
         const signupToggle = document.getElementById('signupToggle');
         const confirmToggle = document.getElementById('confirmToggle');
+        
+        // Save user data to localStorage
+        function saveUserData(user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            // Also save remember me preference
+            localStorage.setItem('rememberMe', rememberMe.checked);
+        }
+        
+        // Get user data from localStorage
+        function getUserData() {
+            const userData = localStorage.getItem('currentUser');
+            const remember = localStorage.getItem('rememberMe') === 'true';
+            
+            if (userData && remember) {
+                return JSON.parse(userData);
+            }
+            return null;
+        }
+        
+        // Clear user data from localStorage
+        function clearUserData() {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('rememberMe');
+        }
         
         // Show/hide auth modal
         function toggleAuthModal() {
@@ -1526,6 +1565,10 @@
                     name: "Gamer User",
                     email: email
                 };
+                
+                // Save to localStorage
+                saveUserData(currentUser);
+                
                 updateAuthUI();
                 toggleAuthModal();
                 showMessage(loginMessage, 'Login successful!', 'success');
@@ -1561,6 +1604,10 @@
                     name: name,
                     email: email
                 };
+                
+                // Save to localStorage
+                saveUserData(currentUser);
+                
                 updateAuthUI();
                 toggleAuthModal();
                 showMessage(signupMessage, 'Account created successfully!', 'success');
@@ -1577,14 +1624,19 @@
         // Logout functionality
         logoutBtn.addEventListener('click', () => {
             currentUser = null;
+            clearUserData();
             updateAuthUI();
         });
         
-        // Initialize
-        updateAuthUI();
-        
-        // Add animations to elements on scroll
+        // Initialize - Check for saved user on page load
         document.addEventListener('DOMContentLoaded', function() {
+            const savedUser = getUserData();
+            if (savedUser) {
+                currentUser = savedUser;
+                updateAuthUI();
+            }
+            
+            // Add animations to elements on scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
