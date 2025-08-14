@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameTop - Premium Game Top-Ups</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --secondary: #ff3c78;
+            --accent: #00e5ff;
+            --dark: #0a0a14;
+            --darker: #05050a;
+            --light: #f0f0f0;
+            --gray: #2a2a3c;
+            --success: #4CAF50;
+            --error: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+        }
+        
+        /* Game Section */
+        .games {
+            padding: 40px 5%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .game-section {
+            background: rgba(30, 30, 46, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .game-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .game-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .packages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .package-card {
+            background: linear-gradient(145deg, var(--darker), var(--dark));
+            border-radius: 15px;
+            padding: 25px 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .package-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .package-price span {
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+        
+        .buy-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            font-size: 1rem;
+            width: 100%;
+            max-width: 150px;
+        }
+        
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6);
+        }
+        
+        /* Order Modal */
+        .order-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .order-card {
+            background: rgba(30, 30, 46, 0.95);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            animation: slideUp 0.5s ease;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+        
+        .order-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .order-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: rgba(20, 20, 35, 0.6);
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
+        }
+        
+        .read-only {
+            background: rgba(40, 40, 60, 0.4);
+            color: #aaa;
+        }
+        
+        .submit-btn {
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
+        }
+        
+        /* Success Message */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .success-card {
+            background: rgba(30, 30, 46, 0.95);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--success);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            color: var(--success);
+            margin-bottom: 25px;
+            animation: bounce 1s ease infinite alternate;
+        }
+        
+        .success-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--success);
+        }
+        
+        .success-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .order-details {
+            background: rgba(20, 20, 35, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .detail-value {
+            font-weight: 500;
+        }
+        
+        .close-success {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .close-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .game-title {
+                font-size: 1.8rem;
+            }
+            
+            .packages-container {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 1.8rem;
+            }
+            
+            .package-amount {
+                font-size: 1.8rem;
+            }
+            
+            .package-price {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-gamepad"></i>
+            <span>GameTop</span>
+        </div>
+    </nav>
+    
+    <!-- Games Section -->
+    <section class="games">
+        <h2 class="section-title">Game Currency Packages</h2>
+        
+        <!-- Free Fire -->
+        <div class="game-section">
+            <div class="game-header">
+                <i class="fas fa-fire game-icon"></i>
+                <h2 class="game-title">Free Fire Diamonds</h2>
+            </div>
+            
+            <div class="packages-container">
+                <div class="package-card">
+                    <div class="package-amount">100+60 Diamonds</div>
+                    <div class="package-price">₹<span>80</span></div>
+                    <button class="buy-button" data-game="Free Fire" data-amount="100+60 Diamonds" data-price="80">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">310+100 Diamonds</div>
+                    <div class="package-price">₹<span>240</span></div>
+                    <button class="buy-button" data-game="Free Fire" data-amount="310+100 Diamonds" data-price="240">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">520+200 Diamonds</div>
+                    <div class="package-price">₹<span>400</span></div>
+                    <button class="buy-button" data-game="Free Fire" data-amount="520+200 Diamonds" data-price="400">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">1060+400 Diamonds</div>
+                    <div class="package-price">₹<span>800</span></div>
+                    <button class="buy-button" data-game="Free Fire" data-amount="1060+400 Diamonds" data-price="800">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">2180+600 Diamonds</div>
+                    <div class="package-price">₹<span>1600</span></div>
+                    <button class="buy-button" data-game="Free Fire" data-amount="3300 Diamonds" data-price="2180+600">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PUBG Mobile -->
+        <div class="game-section">
+            <div class="game-header">
+                <i class="fas fa-crosshairs game-icon"></i>
+                <h2 class="game-title">PUBG Mobile UC</h2>
+            </div>
+            
+            <div class="packages-container">
+                <div class="package-card">
+                    <div class="package-amount">60 UC</div>
+                    <div class="package-price">₹<span>99</span></div>
+                    <button class="buy-button" data-game="PUBG Mobile" data-amount="60 UC" data-price="99">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">325 UC</div>
+                    <div class="package-price">₹<span>499</span></div>
+                    <button class="buy-button" data-game="PUBG Mobile" data-amount="325 UC" data-price="499">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">660 UC</div>
+                    <div class="package-price">₹<span>999</span></div>
+                    <button class="buy-button" data-game="PUBG Mobile" data-amount="660 UC" data-price="999">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">1800 UC</div>
+                    <div class="package-price">₹<span>2,499</span></div>
+                    <button class="buy-button" data-game="PUBG Mobile" data-amount="1800 UC" data-price="2499">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">3850 UC</div>
+                    <div class="package-price">₹<span>4,999</span></div>
+                    <button class="buy-button" data-game="PUBG Mobile" data-amount="3850 UC" data-price="4999">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call of Duty -->
+        <div class="game-section">
+            <div class="game-header">
+                <i class="fas fa-ghost game-icon"></i>
+                <h2 class="game-title">Call of Duty Points</h2>
+            </div>
+            
+            <div class="packages-container">
+                <div class="package-card">
+                    <div class="package-amount">80 CP</div>
+                    <div class="package-price">₹<span>99</span></div>
+                    <button class="buy-button" data-game="Call of Duty" data-amount="80 CP" data-price="99">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">425 CP</div>
+                    <div class="package-price">₹<span>499</span></div>
+                    <button class="buy-button" data-game="Call of Duty" data-amount="425 CP" data-price="499">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">880 CP</div>
+                    <div class="package-price">₹<span>999</span></div>
+                    <button class="buy-button" data-game="Call of Duty" data-amount="880 CP" data-price="999">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">2400 CP</div>
+                    <div class="package-price">₹<span>2,499</span></div>
+                    <button class="buy-button" data-game="Call of Duty" data-amount="2400 CP" data-price="2499">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-amount">5000 CP</div>
+                    <div class="package-price">₹<span>4,999</span></div>
+                    <button class="buy-button" data-game="Call of Duty" data-amount="5000 CP" data-price="4999">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Order Modal -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-card">
+            <button class="close-modal" id="closeOrderModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="order-header">
+                <h1>Complete Your Order</h1>
+                <p>Fill in your game details to proceed</p>
+            </div>
+            
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label class="form-label">Price</label>
+                    <input type="text" class="form-input read-only" id="orderPrice" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Game</label>
+                    <input type="text" class="form-input read-only" id="orderGame" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Game UID</label>
+                    <input type="text" class="form-input" id="gameUid" placeholder="Enter your game UID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <select class="form-input" id="paymentMethod" required>
+                        <option value="">Select payment method</option>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="debit_card">Debit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="upi">UPI</option>
+                        <option value="netbanking">Net Banking</option>
+                        <option value="wallet">E-Wallet</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-lock"></i> Confirm Purchase
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title">Order Placed!</h2>
+            <p class="success-message">Your game currency will be delivered within 5 minutes.</p>
+            
+            <div class="order-details">
+                <div class="detail-item">
+                    <span class="detail-label">Order ID:</span>
+                    <span class="detail-value" id="successOrderId">GT-2023-7854</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Game:</span>
+                    <span class="detail-value" id="successGame">Free Fire</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value" id="successAmount">650 Diamonds</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Price:</span>
+                    <span class="detail-value" id="successPrice">₹999</span>
+                </div>
+            </div>
+            
+            <button class="close-success" id="closeSuccess">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <script>
+        // Order modal functionality
+        const orderModal = document.getElementById('orderModal');
+        const closeOrderModal = document.getElementById('closeOrderModal');
+        const orderForm = document.getElementById('orderForm');
+        const successModal = document.getElementById('successModal');
+        const closeSuccess = document.getElementById('closeSuccess');
+        
+        // Package buttons
+        const buyButtons = document.querySelectorAll('.buy-button');
+        
+        // Order details elements
+        const orderPrice = document.getElementById('orderPrice');
+        const orderGame = document.getElementById('orderGame');
+        const successOrderId = document.getElementById('successOrderId');
+        const successGame = document.getElementById('successGame');
+        const successAmount = document.getElementById('successAmount');
+        const successPrice = document.getElementById('successPrice');
+        
+        // Generate random order ID
+        function generateOrderId() {
+            const prefix = 'GT-2023-';
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            return prefix + randomNum;
+        }
+        
+        // Open order modal when a buy button is clicked
+        buyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const game = button.getAttribute('data-game');
+                const amount = button.getAttribute('data-amount');
+                const price = button.getAttribute('data-price');
+                
+                // Set values in order form
+                orderPrice.value = '₹' + price;
+                orderGame.value = game;
+                
+                // Set values for success modal
+                successGame.textContent = game;
+                successAmount.textContent = amount;
+                successPrice.textContent = '₹' + price;
+                successOrderId.textContent = generateOrderId();
+                
+                // Show order modal
+                orderModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close order modal
+        closeOrderModal.addEventListener('click', () => {
+            orderModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close order modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Form submission
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get UID value
+            const gameUid = document.getElementById('gameUid').value;
+            
+            if (!gameUid) {
+                alert('Please enter your game UID');
+                return;
+            }
+            
+            // Close order modal
+            orderModal.style.display = 'none';
+            
+            // Show success modal after a short delay
+            setTimeout(() => {
+                successModal.style.display = 'flex';
+            }, 300);
+        });
+        
+        // Close success modal
+        closeSuccess.addEventListener('click', () => {
+            successModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset form
+            orderForm.reset();
+        });
+        
+        // Close success modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                
+                // Reset form
+                orderForm.reset();
+            }
+        });
+        
+        // Add hover effect to package cards
+        const packageCards = document.querySelectorAll('.package-card');
+        packageCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.animation = 'pulse 0.5s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.animation = '';
+            });
+        });
+    </script>
+</body>
+</html>
