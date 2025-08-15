@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
         }
         
         body {
@@ -30,6 +30,12 @@
             border-radius: 25px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
             overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .header {
@@ -66,6 +72,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             margin: 0 auto 25px;
+            border: 1px solid #e0e6ff;
         }
         
         #qrcode {
@@ -129,6 +136,20 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .app-logo:hover {
@@ -136,9 +157,18 @@
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
         }
         
+        .app-logo:hover::after {
+            opacity: 1;
+        }
+        
         .app-logo img {
             width: 80%;
             height: auto;
+            transition: transform 0.3s;
+        }
+        
+        .app-logo:hover img {
+            transform: scale(1.1);
         }
         
         .google-pay {
@@ -153,8 +183,8 @@
             background: linear-gradient(to bottom, #00B9F1, #0071BC);
         }
         
-        .bhim {
-            background: linear-gradient(to bottom, #1E88E5, #0D47A1);
+        .fampay {
+            background: linear-gradient(to bottom, #FF6B6B, #FF8E53);
         }
         
         .form-section {
@@ -180,6 +210,7 @@
             border-radius: 15px;
             font-size: 1.1rem;
             transition: all 0.3s;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
         }
         
         .input-group input:focus {
@@ -213,6 +244,7 @@
         .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(26, 41, 128, 0.4);
+            background: linear-gradient(to right, #233a9c, #2ee1df);
         }
         
         .success-message {
@@ -230,6 +262,13 @@
             font-size: 4rem;
             color: #4CAF50;
             margin-bottom: 15px;
+            animation: bounce 1s;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
         }
         
         .success-message h3 {
@@ -266,11 +305,7 @@
             display: none;
             animation: slideUp 0.5s;
             z-index: 1000;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            font-size: 1.1rem;
         }
         
         @keyframes slideUp {
@@ -294,6 +329,16 @@
             gap: 10px;
             margin-top: 10px;
             font-weight: 600;
+        }
+        
+        .info-text {
+            text-align: center;
+            padding: 10px 30px;
+            color: #1a2980;
+            font-style: italic;
+            background: rgba(26, 41, 128, 0.05);
+            border-radius: 10px;
+            margin: 15px 0;
         }
         
         @media (max-width: 600px) {
@@ -344,9 +389,12 @@
         
         <div class="apps-section">
             <h2>Pay With</h2>
+            <div class="info-text">
+                Tap on any app to open it with payment details pre-filled
+            </div>
             <div class="apps-container">
                 <div class="app-logo google-pay" data-app="gpay">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgNDAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMDIuMDIgMTcuODR2LS4wM2MwLTQuNjYtMy42OS04LjQyLTguMjMtOC40Mi00LjU0IDAtOC4yMyAzLjc2LTguMjMgOC40MnYuMDNjMCA0LjY2IDMuNjkgOC40MiA4LjIzIDguNDIgNC41NCAwIDguMjMtMy43NiA4LjIzLTguNDJ6bS0yLjk0IDBjMCAzLjI0LTIuNDYgNS44OC01LjQzIDUuODgtMi45NyAwLTUuNDMtMi42NC01LjQzLTUuODh2LS4wM2MwLTMuMjQgMi40Ni01Ljg4IDUuNDMtNS44OCAyLjk3IDAgNS40MyAyLjY0IDUuNDMgNS44OHYuMDN6TTE4Ni4zNCAxOS41aC0zLjY0di0zLjY0aC0xLjgydjMuNjRoLTMuNjR2MS44MmgzLjY0djMuNjRoMS44MnYtMy42NGgzLjY0di0xLjgyem0tMjEuMzggNS4zN2gtMS44MlYxNC40aDEuODJ2MTAuNDd6bS0xNC42OS0xMC40N2MtLjgxIDAtMS40NS42NC0xLjQ1IDEuNDUgMCAuODEuNjQgMS40NSAxLjQ1IDEuNDUuODEgMCAxLjQ1LS42NCAxLjQ1LTEuNDUgMC0uOC0uNjQtMS40NS0xLjQ1LTEuNDV6bTAgMi4zOGMtLjUxIDAtLjkzLS40Mi0uOTMtLjkzcy40Mi0uOTMuOTMtLjkzLjkzLjQyLjkzLjkzLS40Mi45My0uOTMuOTN6bTAtMS4zNmMtLjI0IDAtLjQzLjE5LS40My40MyAwIC4yNC4xOS40My40My40My4yNCAwIC40My0uMTkuNDMtLjQzIDAtLjI0LS4xOS0uNDMtLjQzLS40M3ptLjI4LjYzaC0uNTZ2LS40M2guNTZ2LjQzem0tLjI4IDBoLS4xNnYtLjQzaC4xNnYuNDN6bTAgMCIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNTIuMzIgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1LjA5IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNMTI0LjYxIDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNMTIxLjYgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE0LjM4IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3oiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA3LjE0IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3oiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTAzLjg3IDE5LjVoLTMuNjR2LTMuNjRoLTEuODJ2My42NGgtMy42NHYxLjgySDk4LjR2My42NGgxLjgydi0zLjY0aDMuNjR2LTEuODJ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTk2LjY1IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNODYuMzMgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNzkuMTEgMjQuODdoLTEuODJWMTQuNGgxLjgydjEwLjQ3eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik03NS44NCAxOS41aC0zLjY0di0zLjY0aC0xLjgydjMuNjRoLTMuNjR2MS44MmgzLjY0djMuNjRoMS44MnYtMy42NGgzLjY0di0xLjgyeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02OC42MiAyNC44N2gtMS44MlYxNC40aDEuODJ2MTAuNDd6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTY1LjM1IDE5LjVoLTMuNjR2LTMuNjRoLTEuODJ2My42NGgtMy42NHYxLjgySDU5Ljl2My42NGgxLjgydi0zLjY0aDMuNjR2LTEuODJ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTU4LjEzIDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNNDcuODEgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNDAuNTkgMjQuODdoLTEuODJWMTQuNGgxLjgydjEwLjQ3eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zNy4zMiAxOS41aC0zLjY0di0zLjY0aC0xLjgydjMuNjRoLTMuNjR2MS44MmgzLjY0djMuNjRoMS44MnYtMy42NGgzLjY0di0xLjgyeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zMC4xIDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3oiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjYuODMgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTkuNjEgMjQuODdoLTEuODJWMTQuNGgxLjgydjEwLjQ3eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNi4zNCAxOS41aC0zLjY0di0zLjY0SDExdi0uMDJ2My42Nkg3LjM0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNOS4xMiAyNC44N0g3LjNWMTQuNGgxLjgydjEwLjQ3eiIvPjwvc3ZnPg==" alt="Google Pay">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgNDAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMDIuMDIgMTcuODR2LS4wM2MwLTQuNjYtMy42OS04LjQyLTguMjMtOC40Mi00LjU0IDAtOC4yMyAzLjc2LTguMjMgOC40MnYuMDNjMCA0LjY2IDMuNjkgOC40MiA4LjIzIDguNDIgNC41NCAwIDguMjMtMy43NiA4LjIzLTguNDJ6bS0yLjk0IDBjMCAzLjI0LTIuNDYgNS44OC01LjQzIDUuODgtMi45NyAwLTUuNDMtMi42NC01LjQzLTUuODh2LS4wM2MwLTMuMjQgMi40Ni01Ljg4IDUuNDMtNS44OCAyLjk3IDAgNS40MyAyLjY0IDUuNDMgNS44OHYuMDN6TTE4Ni4zNCAxOS41aC0zLjY0di0zLjY0aC0xLjgydjMuNjRoLTMuNjR2MS44MmgzLjY0djMuNjRoMS44MnYtMy42NGgzLjY0di0xLjgyem0tMjEuMzggNS4zN2gtMS44MlYxNC40aDEuODJ2MTAuNDd6bS0xNC42OS0xMC40N2MtLjgxIDAtMS40NS42NC0xLjQ1IDEuNDUgMCAuODEuNjQgMS40NSAxLjQ1IDEuNDUuODEgMCAxLjQ1LS42NCAxLjQ1LTEuNDUgMC0uOC0uNjQtMS40NS0xLjQ1LTEuNDV6bTAgMi4zOGMtLjUxIDAtLjkzLS40Mi0uOTMtLjkzcy40Mi0uOTMuOTMtLjkzLjkzLjQyLjkzLjkzLS40Mi45My0uOTMuOTN6bTAtMS4zNmMtLjI0IDAtLjQzLjE5LS40My40MyAwIC4yNC4xOS40My40My40My4yNCAwIC40My0uMTkuNDMtLjQzIDAtLjI0LS4xOS0uNDMtLjQzLS40M3ptLjI4LjYzaC0uNTZ2LS40M2guNTZ2LjQzem0tLjI4IDBoLS4xNnYtLjQzaC4xNnYuNDN6bTAgMCIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNTIuMzIgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1LjA5IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNMTI0LjYxIDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3pNMTIxLjYgMTkuNWgtMy42NHYtMy42NGgtMS44MnYzLjY0aC0zLjY0djEuODJoMy42NHYzLjY0aDEuODJ2LTMuNjRoMy42NHYtMS44MnoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE0LjM4IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3oiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA3LjE0IDI0Ljg3aC0xLjgyVjE0LjRoMS44MnYxMC40N3oiLz48cGF0aCBmaWxs�J9" alt="Google Pay">
                 </div>
                 <div class="app-logo phonepe" data-app="phonepe">
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgNDAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMjcuMzYgMTMuMzhjMC0zLjA1LTIuMzYtNS4zMy01LjY2LTUuMzMtMy4zMSAwLTUuNjcgMi4yOC01LjY3IDUuMzMgMCAzLjA0IDIuMzYgNS4zMiA1LjY3IDUuMzIgMy4zIDAgNS42Ni0yLjI4IDUuNjYtNS4zMnptLTMuMDkgMGMwLTEuMzktMS4wMi0yLjM3LTIuNTctMi4zNy0xLjU1IDAtMi41Ny45OC0yLjU3IDIuMzcgMCAxLjM5IDEuMDIgMi4zNyAyLjU3IDIuMzcgMS41NSAwIDIuNTctLjk4IDIuNTctMi4zN3ptOS42MiA4LjI1di0xLjM1Yy0xLjA2Ljc3LTIuMDIgMS4xMi0zLjI0IDEuMTItMi4zNiAwLTMuNzItMS4zLTMuNzItMy40OFYxNC4zaDMuMDl2NC40NmMwIC44Mi40NiAxLjM0IDEuMzEgMS4zNC44NCAwIDEuNTMtLjQyIDIuMDMtMS4xN3YtNC42M2gzLjA5djguM3ptNy4yMy0zLjI0YzAgMi4zLTEuMjUgMy41Mi0zLjUzIDMuNTItMS4zMSAwLTIuMzgtLjQyLTMuMDktMS4xN3Y0LjA1aC0zLjA5di0xMS4zaDMuMDl2MS4wOWMuNzEtLjgxIDEuNzgtMS4xNyAzLjA5LTEuMTcgMi4yOCAwIDMuNTMgMS4zIDMuNTMgMy41MnptLTMuMDkgMGMwLTEuMjItLjY1LTEuOTEtMS44NC0xLjkxLTEuMTkgMC0xLjg0LjY5LTEuODQgMS45MXMuNjUgMS45IDEuODQgMS45YzEuMTkgMCAxLjg0LS42OCAxLjg0LTEuOXptMTcuODkgMy4yNGgtMy4wOXYtMS4zNWMtLjUuNzUtMS4xOSAxLjE3LTIuMDMgMS4xNy0uODUgMC0xLjMxLS41Mi0xLjMxLTEuMzR2LTQuNDZoMy4wOXYtMy4wOWgtMy4wOXYtMi4xNWgtMy4wOXYyLjE1aC0xLjY4djMuMDloMS42OHY0LjY0YzAgMi4xOCAxLjM2IDMuNDggMy43MiAzLjQ4IDEuMjIgMCAyLjE4LS4zNSAzLjI0LTEuMTJ2MS4zNXptMy4yOS0zLjI0YzAgMi4zLTEuMjUgMy41Mi0zLjUzIDMuNTItMS4zMSAwLTIuMzgtLjQyLTMuMDktMS4xN3Y0LjA1aC0zLjA5di0xMS4zaDMuMDl2MS4wOWMuNzEtLjgxIDEuNzgtMS4xNyAzLjA5LTEuMTcgMi4yOCAwIDMuNTMgMS4zIDMuNTMgMy41MnptLTMuMDkgMGMwLTEuMjItLjY1LTEuOTEtMS44NC0xLjkxLTEuMTkgMC0xLjg0LjY5LTEuODQgMS45MXMuNjUgMS45IDEuODQgMS45YzEuMTkgMCAxLjg0LS42OCAxLjg0LTEuOXptMTIuMDggMy4yNGgtMy4wOXYtMS4zNWMtLjUuNzUtMS4xOSAxLjE3LTIuMDMgMS4xNy0uODUgMC0xLjMxLS41Mi0xLjMxLTEuMzR2LTQuNDZoMy4wOXYtMy4wOWgtMy4wOXYtMi4xNWgtMy4wOXYyLjE1aC0xLjY4djMuMDloMS42OHY0LjY0YzAgMi4xOCAxLjM2IDMuNDggMy43MiAzLjQ4IDEuMjIgMCAyLjE4LS4zNSAzLjI0LTEuMTJ2MS4zNXptMTEuODctMy4yNGMwIDIuMy0xLjI1IDMuNTItMy41MyAzLjUyLTEuMzEgMC0yLjM4LS40Mi0zLjA5LTEuMTd2NC4wNWgtMy4wOXYtMTEuM2gzLjA5djEuMDljLjcxLS44MSAxLjc4LTEuMTcgMy4wOS0xLjE3IDIuMjggMCAzLjUzIDEuMyAzLjUzIDMuNTJ6bS0zLjA5IDBjMC0xLjIyLS42NS0xLjkxLTEuODQtMS45MS0xLjE5IDAtMS44NC42OS0xLjg0IDEuOTFzLjY1IDEuOSAxLjg0IDEuOWMxLjE5IDAgMS44NC0uNjggMS44NC0xLjl6bTEyLjA5LTMuMjRoLTMuMDl2My4wOWgtLjAyYy0uNzEtLjgxLTEuNzgtMS4xNy0zLjA5LTEuMTctMi4yOCAwLTMuNTMgMS4zLTMuNTMgMy41MiAwIDIuMjIgMS4yNSAzLjUyIDMuNTMgMy41MiAxLjMxIDAgMi4zOC0uNDIgMy4wOS0xLjE3di4xMWgzLjA5di04LjN6bS0zLjA5IDUuNDhjMCAxLjIyLS42NSAxLjkxLTEuODQgMS45MS0xLjE5IDAtMS44NC0uNjktMS44NC0xLjkxczAuNjUtMS45IDEuODQtMS45YzEuMTkgMCAxLjg0LjY5IDEuODQgMS45eiIvPjwvc3ZnPg==" alt="PhonePe">
@@ -354,8 +402,8 @@
                 <div class="app-logo paytm" data-app="paytm">
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgNDAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNjQuOTIgMTUuMDFoLTUuMzR2OS44NmgtMi4xMnYtOS44NmgtNS4zNHYtMS44NmgxMi44djEuODZ6bS0xOC4xOCAwaC01LjM0djkuODZoLTIuMTJ2LTkuODZoLTEuNzR2LTEuODZoMS43NHYtMi4wM2gyLjEyVjEzLjE1aDUuMzR2MS44NnptLTEyLjQ5IDBoLTUuMzR2OS44NmgtMi4xMnYtOS44NmgtMS43M1YxMy4xNWgxLjczdi0yLjAzaDIuMTJWMTMuMTVoNS4zNHYxLjg2em0tMTguMTkgMGgtNS4zNHY5Ljg2aC0yLjEydi05Ljg2aC0xLjc0di0xLjg2aDEuNzR2LTIuMDNoMi4xMlYxMy4xNWg1LjM0djEuODZ6bS03NC4xNyAwaC01LjM0djkuODZoLTIuMTJ2LTkuODZoLTEuNzN2LTEuODZoMS43M3YtMi4wM2gyLjEyVjEzLjE1aDUuMzR2MS44NnptMTkuMzQgNy4wM3YtNS4xN2MwLTIuNTItMS40OC0zLjYzLTMuODQtMy42My0yLjM1IDAtMy44NCAxLjEtMy44NCAzLjYzdjUuMTdoLTIuMTJ2LTUuMTdjMC0yLjUyLTEuNDgtMy42My0zLjg0LTMuNjMtMi4zNSAwLTMuODQgMS4xLTMuODQgMy42M3Y1LjE3aC0yLjEydi05Ljg2aDIuMTJ2MS40YzEuMDEtLjk0IDIuMzctMS40MiAzLjg0LTEuNDIgMS40NyAwIDIuODMuNDggMy44NCAxLjQydi0xLjRoMi4xMnYxLjRjMS4wMS0uOTQgMi4zNy0xLjQyIDMuODQtMS40MiAxLjQ3IDAgMi44My40OCAzLjg0IDEuNDJ2LTEuNGgyLjEydjkuODZoLTIuMTJ6bTQzLjI1IDIuODNoLTIuMTJ2LTkuODZoMi4xMnY5Ljg2eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMjEuNjUgMTUuMDFoLTEuNTR2LTEuODZoNi4wOXYxLjg2aC0xLjU0djcuOTloMi4xMnYxLjg3aC02LjA5di0xLjg3aDIuMDZWMTUuMDF6TTE5NS45MyAyMy4wNGMtLjg4IDAtMS43Mi0uMjMtMi40Mi0uNjQtLjc0LS40NC0xLjMxLTEuMDQtMS42OS0xLjc4LS4zOC0uNzQtLjU3LTEuNTgtLjU3LTIuNTMgMC0uOTUuMTktMS43OS41Ny0yLjUzLjM4LS43NC45NS0xLjM0IDEuNjktMS43OC43LS40MSAxLjU0LS42NCAyLjQyLS42NC44OCAwIDEuNzIuMjMgMi40Mi42NC43NC40NCAxLjMxIDEuMDQgMS42OSAxLjc4LjM4Ljc0LjU3IDEuNTguNTcgMi41MyAwIC45NS0uMTkgMS43OS0uNTcgMi41My0uMzguNzQtLjk1IDEuMzQtMS42OSAxLjc4LS43LjQxLTEuNTQuNjQtMi40Mi42NHptMC0xLjg2Yy42MiAwIDEuMTktLjE3IDEuNjYtLjUyLjQ5LS4zNi44NC0uODUgMS4wNy0xLjQ4LjIzLS42My4zNC0xLjMzLjM0LTIuMDkgMC0uNzYtLjExLTEuNDYtLjM0LTIuMDktLjIzLS42My0uNTgtMS4xMi0xLjA3LTEuNDgtLjQ3LS4zNS0xLjA0LS41Mi0xLjY2LS41Mi0uNjIgMC0xLjE5LjE3LTEuNjYuNTItLjQ5LjM2LS44NC44NS0xLjA3IDEuNDgtLjIzLjYzLS4zNCAxLjMzLS4zNCAyLjA5IDAgLjc2LjExIDEuNDYuMzQgMi4wOS4yMy42My41OCAxLjEyIDEuMDcgMS40OC40Ny4zNSAxLjA0LjUyIDEuNjYuNTJ6Ii8+PC9zdmc+" alt="Paytm">
                 </div>
-                <div class="app-logo bhim" data-app="bhim">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgNDAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMDMuNTIgMTcuNjJoLTIuNDd2LTUuMjNoLTIuMDN2NS4yM2gtMi40N3YyLjA4aDIuNDd2NS4yM2gyLjAzdi01LjIzaDIuNDd2LTIuMDh6bTEwLjQ4IDcuMzFoLTIuMDN2LTkuMzFoMi4wM3Y5LjMxem0yLjU0LTcuMzFoLTIuNDd2LTIuMDhoNC41djIuMDhoLTIuMDN2Ny4zMWgtMi4wM3YtNy4zMXptOS4zNS03LjMxaC0yLjQ3djkuMzFoMi40N3YyLjA4aC00LjV2LTExLjRoNC41djIuMDh6bTguODcgNy4zMWgtMi40N3YtNS4yM2gtMi4wM3Y1LjIzaC0yLjQ3djIuMDhoMi40N3Y1LjIzaDIuMDN2LTUuMjNoMi40N3YtMi4wOHptMTQuOTcgMGgtMi40N3YtNS4yM2gtMi4wM3Y1LjIzaC0yLjQ3djIuMDhoMi40N3Y1LjIzaDIuMDN2LTUuMjNoMi40N3YtMi4wOHptLTI4LjM4LTcuMzFoMi40N3YyLjA4aC0yLjQ3djcuMzFoLTIuMDN2LTkuMzloMi4wM3ptLTUuNDEgMGgyLjAzdjkuMzloLTIuMDN2LTkuMzl6bS0yMi43IDcuMzFoLTIuNDd2LTUuMjNoLTIuMDN2NS4yM2gtMi40N3YyLjA4aDIuNDd2NS4yM2gyLjAzdi01LjIzaDIuNDd2LTIuMDh6bS0xMC4zMiAwaC0yLjQ3di01LjIzaC0yLjAzdjUuMjNoLTIuNDd2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4em0xMC4zMi03LjMxaC0yLjQ3djIuMDhoMi40N3Y3LjMxaDIuMDN2LTkuMzloLTIuMDN6bS0xOC43NCA3LjMxaC0yLjQ3di01LjIzaC0yLjAzdjUuMjNoLTIuNDd2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4em0tMTAuMzIgMGgtMi40N3YtNS4yM0g2Mi44djUuMjNoLTIuNDd2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4ek02MC4xIDEwLjMxaC0yLjQ3djIuMDhoMi40N3Y3LjMxaDIuMDN2LTkuMzloLTIuMDN6bTQ0Ljg3IDcuMzFoLTIuNDd2LTUuMjNoLTIuMDN2NS4yM2gtMi40N3YyLjA4aDIuNDd2NS4yM2gyLjAzdi01LjIzaDIuNDd2LTIuMDh6bS0yOC4zOC03LjMxaDIuNDd2Mi4wOGgtMi40N3Y3LjMxaC0yLjAzdi05LjM5aDIuMDN6bS0xOC43NCA3LjMxaC0yLjQ3di01LjIzaC0yLjAzdjUuMjNoLTIuNDd2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4em0tMTAuMzIgMGgtMi40N3YtNS4yM0gyOS41djUuMjNIMjcuMDV2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4ek0yNy4wNSAxMC4zMWgtMi40N3YyLjA4aDIuNDd2Ny4zMWgyLjAzdi05LjM5aC0yLjAzem00NC44NyA3LjMxaC0yLjQ3di01LjIzaC0yLjAzdjUuMjNoLTIuNDd2Mi4wOGgyLjQ3djUuMjNoMi4wM3YtNS4yM2gyLjQ3di0yLjA4ek01NS4xNiAyMC42MmgtMi4wM3YtOS4zMWgyLjAzVjIwLjYyeiIvPjwvc3ZnPg==" alt="BHIM">
+                <div class="app-logo fampay" data-app="fampay">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMTI4IDMxMmgtMzJ2LTE2YzAtOC44LTcuMi0xNi0xNi0xNnMtMTYgNy4yLTE2IDE2djE2aC0zMnYtMTZjMC04LjgtNy4yLTE2LTE2LTE2cy0xNiA3LjItMTYgMTZ2MTZoLTMyYy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2aDE2di02NGgtMTZjLTguOCAwLTE2LTcuMi0xNi0xNnM3LjItMTYgMTYtMTZoMTZ2LTE2YzAtOC44IDcuMi0xNiAxNi0xNnMxNiA3LjIgMTYgMTZ2MTZoMzJ2LTE2YzAtOC44IDcuMi0xNiAxNi0xNnMxNiA3LjIgMTYgMTZ2MTZoMzJjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZoLTE2djY0aDE2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2em0tOTYgMGgtMzJ2LTY0aDMydjY0em02NCAwaC0zMnYtNjRoMzJ2NjR6Ii8+PC9zdmc+" alt="FamPay">
                 </div>
             </div>
         </div>
@@ -460,9 +508,9 @@
                         uri = `paytmmp://pay?pa=${upiId}&pn=Recipient`;
                         appName = "Paytm";
                         break;
-                    case 'bhim':
-                        uri = `bhim://pay?pa=${upiId}&pn=Recipient`;
-                        appName = "BHIM";
+                    case 'fampay':
+                        uri = `fampay://pay?pa=${upiId}&pn=Recipient`;
+                        appName = "FamPay";
                         break;
                     default:
                         uri = `upi://pay?pa=${upiId}&pn=Recipient`;
