@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header {
+            background: #1a2a6c;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .upi-id-display {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a2a6c;
+            border: 2px dashed #1a2a6c;
+        }
+        
+        .payment-options {
+            margin: 30px 0;
+        }
+        
+        .payment-options h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .apps-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .app-button {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .app-button:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            border-color: #1a2a6c;
+        }
+        
+        .app-button i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .app-button span {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .pay-button {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pay-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(to right, #233a9c, #c22f2f);
+        }
+        
+        .instructions {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: #1a2a6c;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .note {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .app-button {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .app-button i {
+                font-size: 2rem;
+            }
+            
+            .pay-button {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>UPI Payment Gateway</h1>
+            <p>Fast, Secure & Easy Payments</p>
+        </div>
+        
+        <div class="content">
+            <h2>Send Payment To:</h2>
+            <div class="upi-id-display">
+                <i class="fas fa-id-card"></i> mintujaat@fam
+            </div>
+            
+            <div class="payment-options">
+                <h3>Pay with your preferred UPI app</h3>
+                <div class="apps-container">
+                    <div class="app-button" data-app="gpay">
+                        <i class="fab fa-google-pay" style="color: #0c9d58;"></i>
+                        <span>Google Pay</span>
+                    </div>
+                    <div class="app-button" data-app="phonepe">
+                        <i class="fas fa-mobile-alt" style="color: #6b48ff;"></i>
+                        <span>PhonePe</span>
+                    </div>
+                    <div class="app-button" data-app="paytm">
+                        <i class="fas fa-wallet" style="color: #002e6e;"></i>
+                        <span>Paytm</span>
+                    </div>
+                    <div class="app-button" data-app="bhim">
+                        <i class="fas fa-rupee-sign" style="color: #1e88e5;"></i>
+                        <span>BHIM</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="pay-button" id="payButton">
+                <i class="fas fa-money-bill-wave"></i> Pay Now
+            </button>
+            
+            <div class="note">
+                <p><i class="fas fa-info-circle"></i> After clicking "Pay Now", select your preferred UPI app to complete the payment. Your UPI ID (mintujaat@fam) will be automatically filled.</p>
+            </div>
+            
+            <div class="instructions">
+                <h3>How to Pay:</h3>
+                <ol>
+                    <li>Click on the "Pay Now" button above</li>
+                    <li>Select your preferred UPI app from the list</li>
+                    <li>Verify that the UPI ID is "mintujaat@fam"</li>
+                    <li>Enter the payment amount and your UPI PIN</li>
+                    <li>Confirm the payment to complete transaction</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Secure payment gateway • 256-bit encryption • PCI DSS compliant</p>
+            <p>© 2023 UPI Payment Solutions. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const upiId = 'mintujaat@fam';
+            const payButton = document.getElementById('payButton');
+            const appButtons = document.querySelectorAll('.app-button');
+            
+            // Function to redirect to payment app
+            function redirectToApp(app) {
+                let uri;
+                
+                switch(app) {
+                    case 'gpay':
+                        // Google Pay uses the standard UPI format
+                        uri = `upi://pay?pa=${upiId}&pn=Recipient&cu=INR`;
+                        break;
+                    case 'phonepe':
+                        // PhonePe uses a slightly different format
+                        uri = `phonepe://upi/pay?pa=${upiId}&pn=Recipient&cu=INR`;
+                        break;
+                    case 'paytm':
+                        // Paytm uses standard UPI format
+                        uri = `paytmmp://upi/pay?pa=${upiId}&pn=Recipient&cu=INR`;
+                        break;
+                    case 'bhim':
+                        // BHIM uses standard UPI format
+                        uri = `bhim://upi/pay?pa=${upiId}&pn=Recipient&cu=INR`;
+                        break;
+                    default:
+                        // Default to standard UPI format
+                        uri = `upi://pay?pa=${upiId}&pn=Recipient&cu=INR`;
+                }
+                
+                // Try to open the UPI app
+                window.location.href = uri;
+                
+                // Fallback in case the app doesn't open
+                setTimeout(function() {
+                    if (!document.webkitHidden && !document.hidden) {
+                        alert('Could not open the payment app. Please make sure you have a UPI app installed.');
+                    }
+                }, 500);
+            }
+            
+            // Main pay button click handler
+            payButton.addEventListener('click', function() {
+                // Create a menu for app selection
+                const app = prompt(`Select payment app:\n1. Google Pay\n2. PhonePe\n3. Paytm\n4. BHIM\n\nEnter number (1-4)`, "1");
+                
+                if (app !== null) {
+                    switch(app) {
+                        case '1': redirectToApp('gpay'); break;
+                        case '2': redirectToApp('phonepe'); break;
+                        case '3': redirectToApp('paytm'); break;
+                        case '4': redirectToApp('bhim'); break;
+                        default: alert('Please select a valid option');
+                    }
+                }
+            });
+            
+            // Add click handlers to individual app buttons
+            appButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const app = this.getAttribute('data-app');
+                    redirectToApp(app);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
